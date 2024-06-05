@@ -1,0 +1,160 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Car {
+    private int carId;
+    private String make;
+    private String model;
+    private int year;
+    private boolean isRented;
+
+    // Constructor
+    public Car(int carId, String make, String model, int year) {
+        this.carId = carId;
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.isRented = false;
+    }
+
+    // Getters and setters
+    public int getCarId() {
+        return carId;
+    }
+
+    public void setCarId(int carId) {
+        this.carId = carId;
+    }
+
+    public String getMake() {
+        return make;
+    }
+
+    public void setMake(String make) {
+        this.make = make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public boolean isRented() {
+        return isRented;
+    }
+
+    public void setRented(boolean rented) {
+        isRented = rented;
+    }
+
+    // Rent and return methods
+    public void rentCar() {
+        if (!isRented) {
+            isRented = true;
+            System.out.println("Car rented successfully.");
+        } else {
+            System.out.println("Car is already rented.");
+        }
+    }
+
+    public void returnCar() {
+        if (isRented) {
+            isRented = false;
+            System.out.println("Car returned successfully.");
+        } else {
+            System.out.println("Car is not currently rented.");
+        }
+    }
+}
+
+public class Customer {
+    private int customerId;
+    private String name;
+    private String email;
+
+    // Constructor
+    public Customer(int customerId, String name, String email) {
+        this.customerId = customerId;
+        this.name = name;
+        this.email = email;
+    }
+
+    // Getters and setters
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}
+
+public class RentalAgency {
+    private List<Car> availableCars;
+    private List<Customer> customers;
+
+    // Constructor
+    public RentalAgency() {
+        this.availableCars = new ArrayList<>();
+        this.customers = new ArrayList<>();
+    }
+
+    // Method to add new car
+    public void addCar(Car car) {
+        availableCars.add(car);
+    }
+
+    // Method to add new customer
+    public void addCustomer(Customer customer) {
+        customers.add(customer);
+    }
+
+    // Method to rent a car
+    public void rentCar(int carId) {
+        for (Car car : availableCars) {
+            if (car.getCarId() == carId) {
+                car.rentCar();
+                return;
+            }
+        }
+        System.out.println("Car not found or unavailable for rent.");
+    }
+
+    // Method to return a car
+    public void returnCar(int carId) {
+        for (Car car : availableCars) {
+            if (car.getCarId() == carId) {
+                car.returnCar();
+                return;
+            }
+        }
+        System.out.println("Car not found or not rented from this agency.");
+    }
+}
